@@ -12,8 +12,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
    
-    <!--MECMua EKİBİ TARAFINDAN GELİŞTİRİLMİŞTİR ;)-->
-    <!--DEVELOPED BY MECMua TEAM-->
+  <!--MECMua EKİBİ TARAFINDAN GELİŞTİRİLMİŞTİR ;)-->
+  <!--DEVELOPED BY MECMua TEAM-->
 
   <style>
     :root {
@@ -66,7 +66,7 @@
       padding-right: max(16px, env(safe-area-inset-right));
     }
 
-    /* ÜST NAVİGASYON BAR */
+    
     .topbar {
       background-color: var(--olive-deep);
       color: var(--bg-sand);
@@ -95,7 +95,6 @@
       gap: 14px;
     }
 
-    /* LOGO KUTUSU */
     .logo-box {
       position: relative;
       width: 48px;
@@ -174,6 +173,39 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background-color: var(--olive-box);
+      border: 1px solid rgba(61, 107, 79, 0.75);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #A7B8AE;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .lang-btn.active {
+      background-color: var(--sage-accent);
+      color: #FFFFFF;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .select-wrap {
@@ -238,7 +270,6 @@
       transform: scale(0.97);
     }
 
-    /* ANA DÜZEN & GRID SİSTEMİ */
     .main-content {
       padding-top: 24px;
       padding-bottom: 36px;
@@ -290,12 +321,11 @@
         display: none;
       }
       .region-select {
-        max-width: 210px;
+        max-width: 185px;
         font-size: 12px;
       }
     }
 
-    /* KART STİLLERİ */
     .card {
       background-color: var(--surface-card);
       border-radius: 16px;
@@ -353,7 +383,6 @@
     .stat-note-blue { color: #2B6CB0; }
     .stat-note-muted { color: var(--ink-muted); }
 
-    /* HARİTA & DRONE BÖLÜMÜ */
     .map-card {
       overflow: hidden;
       display: flex;
@@ -447,7 +476,6 @@
       font-weight: 700 !important;
     }
 
-    /* CANLI DRONE HUD */
     .drone-hud {
       position: absolute;
       bottom: 16px;
@@ -519,7 +547,6 @@
       color: #A7B8AE;
     }
 
-    /* DRONE HARİTA İKONU */
     .drone-pin {
       position: relative;
       display: flex;
@@ -559,7 +586,6 @@
       100% { transform: scale(2.4); opacity: 0; }
     }
 
-    /* SAĞ PANEL */
     .profile-card {
       display: flex;
       flex-direction: column;
@@ -652,7 +678,6 @@
       line-height: 1.5;
     }
 
-    /* OTOMASYON FORMU */
     .rule-form-box {
       background-color: var(--surface-soft);
       border: 1px solid var(--border-stone);
@@ -776,7 +801,6 @@
 
     .btn-del:hover { color: #B91C1C; }
 
-    /* ROTASYON KARTLARI */
     .advice-list {
       display: flex;
       flex-direction: column;
@@ -876,8 +900,32 @@
       margin-top: 8px;
     }
 
-    /* PDF ÇIKTI STİLLERİ */
     .print-header { display: none; }
+
+    .print-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .print-logo-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background-color: var(--olive-deep);
+      border: 1.5px solid var(--harvest-amber);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .print-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     @media print {
       body {
@@ -889,8 +937,8 @@
       .print-header {
         display: flex !important;
         justify-content: space-between;
-        align-items: flex-end;
-        padding: 20px 24px 14px;
+        align-items: center;
+        padding: 18px 24px 14px;
         border-bottom: 2px solid var(--olive-deep);
         margin-bottom: 16px;
       }
@@ -919,11 +967,17 @@
             <span class="brand-serif brand-title">MECMua</span>
             <span class="brand-badge">AGRI-OS</span>
           </div>
-          <p class="brand-subtitle">Tarımsal Uydu Telemetri & Otonom Saha Yönetimi</p>
+          <p class="brand-subtitle" id="brandSubtitle">Tarımsal Uydu Telemetri & Otonom Saha Yönetimi</p>
         </div>
       </div>
 
       <div class="topbar-controls">
+      
+        <div class="lang-switch" role="group" aria-label="Language Switcher">
+          <button type="button" id="langBtnTr" class="lang-btn active" onclick="setLanguage('tr')">TR</button>
+          <button type="button" id="langBtnEn" class="lang-btn" onclick="setLanguage('en')">EN</button>
+        </div>
+
         <div class="select-wrap">
           <select id="regionSelect" onchange="changeRegion(this.value)" class="region-select">
             <option value="icanadolu">İç Anadolu Bölgesi (Laçin, Eskişehir)</option>
@@ -937,19 +991,27 @@
 
         <button onclick="generatePDFReport()" class="btn-pdf">
           <i data-lucide="file-down" style="width:16px;height:16px;"></i>
-          <span>A4 PDF Rapor</span>
+          <span id="btnPdfText">A4 PDF Rapor</span>
         </button>
       </div>
     </div>
   </header>
 
   <div class="print-header">
-    <div>
-      <h1 class="brand-serif" style="font-size:22px;color:#1C2B22;">MECMua Tarımsal Saha ve Uydu Analiz Raporu</h1>
-      <p style="font-size:13px;color:#646B66;margin-top:4px;" id="printRegionSubtitle">Bölge Analizi</p>
+    <div class="print-brand-wrap">
+      <div class="print-logo-box">
+        <img id="printLogo" src="" alt="MECMua Logo" class="print-logo-img" />
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+          <span class="brand-serif" style="font-size:13px;font-weight:800;color:#3D6B4F;letter-spacing:0.04em;">MECMua AGRI-OS</span>
+        </div>
+        <h1 class="brand-serif" style="font-size:20px;color:#1C2B22;line-height:1.2;" id="printMainTitle">MECMua Tarımsal Saha ve Uydu Analiz Raporu</h1>
+        <p style="font-size:12px;color:#646B66;margin-top:4px;" id="printRegionSubtitle">Bölge Analizi</p>
+      </div>
     </div>
-    <div style="text-align:right;font-size:12px;color:#646B66;">
-      <p style="font-weight:700;color:#1E2420;">Rapor Tarihi</p>
+    <div style="text-align:right;font-size:12px;color:#646B66;flex-shrink:0;">
+      <p style="font-weight:700;color:#1E2420;" id="printDateLabel">Rapor Tarihi</p>
       <p id="printDate"></p>
     </div>
   </div>
@@ -962,9 +1024,9 @@
           <i data-lucide="sun" style="width:24px;height:24px;"></i>
         </div>
         <div>
-          <p class="stat-label">Güneş Radyasyonu</p>
+          <p class="stat-label" id="lblSolar">Güneş Radyasyonu</p>
           <p class="stat-value" id="statSolar">--</p>
-          <p class="stat-note">Anlık Sensör Akışı</p>
+          <p class="stat-note" id="noteSolar">Anlık Sensör Akışı</p>
         </div>
       </div>
 
@@ -973,7 +1035,7 @@
           <i data-lucide="droplets" style="width:24px;height:24px;"></i>
         </div>
         <div>
-          <p class="stat-label">Toprak Nemi (27cm)</p>
+          <p class="stat-label" id="lblMoisture">Toprak Nemi (27cm)</p>
           <p class="stat-value" id="statMoisture">--</p>
           <p class="stat-note stat-note-blue" id="statMoistureNote">Hesaplanıyor...</p>
         </div>
@@ -984,9 +1046,9 @@
           <i data-lucide="leaf" style="width:24px;height:24px;"></i>
         </div>
         <div>
-          <p class="stat-label">NDVI Bitki Sağlığı</p>
+          <p class="stat-label" id="lblNdvi">NDVI Bitki Sağlığı</p>
           <p class="stat-value" id="statNdvi">--</p>
-          <p class="stat-note">Klorofil Yoğunluğu</p>
+          <p class="stat-note" id="noteNdvi">Klorofil Yoğunluğu</p>
         </div>
       </div>
 
@@ -995,7 +1057,7 @@
           <i data-lucide="wind" style="width:24px;height:24px;"></i>
         </div>
         <div>
-          <p class="stat-label">Rüzgar & Sıcaklık</p>
+          <p class="stat-label" id="lblWeather">Rüzgar & Sıcaklık</p>
           <p class="stat-value" id="statWeather">--</p>
           <p class="stat-note stat-note-muted" id="statHumidityNote">Nem: --</p>
         </div>
@@ -1017,9 +1079,9 @@
           <div class="drone-actions no-print">
             <button id="btnStartDrone" onclick="toggleDroneSimulation()" class="btn-drone">
               <i data-lucide="play" style="width:14px;height:14px;"></i>
-              <span>İlaçlama Dronunu Başlat</span>
+              <span id="btnStartDroneText">İlaçlama Dronunu Başlat</span>
             </button>
-            <button onclick="resetDrone()" class="btn-reset" title="Dronu Üsse Döndür">
+            <button onclick="resetDrone()" class="btn-reset" id="btnResetDrone" title="Dronu Üsse Döndür">
               <i data-lucide="rotate-ccw" style="width:16px;height:16px;"></i>
             </button>
           </div>
@@ -1032,7 +1094,7 @@
             <div class="hud-top">
               <span class="hud-status">
                 <span class="pulse-dot"></span>
-                AGRAS T40 OTONOM UÇUŞTA
+                <span id="hudStatusText">AGRAS T40 OTONOM UÇUŞTA</span>
               </span>
               <span style="font-family:monospace;color:#A7B8AE;" id="droneProgressText">%0</span>
             </div>
@@ -1040,9 +1102,9 @@
               <div id="droneProgressBar" class="progress-fill" style="width:0%;"></div>
             </div>
             <div class="hud-metrics">
-              <div>İrtifa: <strong style="color:#fff;">4.5 m</strong></div>
-              <div>Debi: <strong style="color:#fff;">12 L/dk</strong></div>
-              <div>Batarya: <strong style="color:#74A886;" id="droneBattery">%98</strong></div>
+              <div><span id="hudAltLabel">İrtifa</span>: <strong style="color:#fff;">4.5 m</strong></div>
+              <div><span id="hudFlowLabel">Debi</span>: <strong style="color:#fff;" id="hudFlowVal">12 L/dk</strong></div>
+              <div><span id="hudBatLabel">Batarya</span>: <strong style="color:#74A886;" id="droneBattery">%98</strong></div>
             </div>
           </div>
         </div>
@@ -1053,28 +1115,28 @@
           <div class="card-header-row">
             <h3 class="section-title">
               <i data-lucide="layers" style="width:20px;height:20px;color:#3D6B4F;"></i>
-              Toprak & Ekoloji Profili
+              <span id="lblSoilProfile">Toprak & Ekoloji Profili</span>
             </h3>
             <span class="pill-sage" id="soilBadge">--</span>
           </div>
 
           <div>
             <div class="info-row">
-              <span class="info-label">Baskın Ekili Ürün</span>
+              <span class="info-label" id="lblCurrentCrop">Baskın Ekili Ürün</span>
               <span class="info-val" id="currentCrop">--</span>
             </div>
             <div class="info-row">
-              <span class="info-label">Toprak pH & Organik</span>
+              <span class="info-label" id="lblSoilPh">Toprak pH & Organik</span>
               <span class="info-val" id="soilPhOrganic">--</span>
             </div>
             <div class="info-row">
-              <span class="info-label">İHA Operasyon Durumu</span>
+              <span class="info-label" id="lblSprayStatus">İHA Operasyon Durumu</span>
               <span class="info-amber" id="sprayAdvice">--</span>
             </div>
           </div>
 
           <div class="crops-wrap">
-            <p class="mini-heading">Bölgeye Uygun Yüksek Verimli Türler</p>
+            <p class="mini-heading" id="lblRegionalCrops">Bölgeye Uygun Yüksek Verimli Türler</p>
             <div id="regionalCropsList" class="chips-container"></div>
           </div>
         </div>
@@ -1082,7 +1144,7 @@
         <div class="ai-note-box">
           <i data-lucide="sparkles" style="width:20px;height:20px;color:#C87A28;flex-shrink:0;margin-top:2px;"></i>
           <div>
-            <h4 class="ai-note-title">Anlık Saha & İklim Analizi</h4>
+            <h4 class="ai-note-title" id="lblAiAnalysisTitle">Anlık Saha & İklim Analizi</h4>
             <p class="ai-note-text" id="aiSummaryNote">Veriler analiz ediliyor...</p>
           </div>
         </div>
@@ -1095,11 +1157,11 @@
         <div class="card-header-row" style="margin-bottom:4px;">
           <h2 class="section-title">
             <i data-lucide="cpu" style="width:20px;height:20px;color:#3D6B4F;"></i>
-            Özelleştirilebilir Saha Otomasyon Senaryoları
+            <span id="lblAutoTitle">Özelleştirilebilir Saha Otomasyon Senaryoları</span>
           </h2>
-          <span class="crop-chip">Canlı Tetikleme</span>
+          <span class="crop-chip" id="lblLiveTrigger">Canlı Tetikleme</span>
         </div>
-        <p class="section-sub">Anlık sensör verilerine göre otomatik tetiklenen kurallar oluşturun (Örn: Sıcaklık &lt; 10°C ise Sera Isıtıcılarını Aç).</p>
+        <p class="section-sub" id="lblAutoSub">Anlık sensör verilerine göre otomatik tetiklenen kurallar oluşturun (Örn: Sıcaklık &lt; 10°C ise Sera Isıtıcılarını Aç).</p>
 
         <div class="rule-form-box no-print">
           <div class="rule-grid">
@@ -1120,7 +1182,7 @@
 
           <div class="rule-action-row">
             <input type="text" id="ruleAction" placeholder="Tetiklenecek Aksiyon (Örn: Sera ısıtıcılarını %80 güçte aç)" class="form-control" style="font-weight:400;" />
-            <button onclick="addCustomRule()" class="btn-add-rule">+ Senaryo Ekle</button>
+            <button onclick="addCustomRule()" class="btn-add-rule" id="btnAddRule">+ Senaryo Ekle</button>
           </div>
         </div>
 
@@ -1131,11 +1193,11 @@
         <div class="card-header-row" style="margin-bottom:4px;">
           <h2 class="section-title">
             <i data-lucide="clipboard-check" style="width:20px;height:20px;color:#3D6B4F;"></i>
-            Bölgesel Ziraat & Ekim Takvimi Tavsiyeleri
+            <span id="lblAdviceTitle">Bölgesel Ziraat & Ekim Takvimi Tavsiyeleri</span>
           </h2>
           <span class="pill-sage" id="adviceRegionTag">İç Anadolu</span>
         </div>
-        <p class="section-sub">Seçili bölgenin mikro-klimasına ve toprak kimyasına göre hazırlanmış saha uygulama rehberi.</p>
+        <p class="section-sub" id="lblAdviceSub">Seçili bölgenin mikro-klimasına ve toprak kimyasına göre hazırlanmış saha uygulama rehberi.</p>
 
         <div id="regionalAdviceList" class="advice-list"></div>
       </div>
@@ -1147,13 +1209,13 @@
         <div>
           <h2 class="section-title" style="font-size:18px;">
             <i data-lucide="refresh-cw" style="width:20px;height:20px;color:#3D6B4F;"></i>
-            3 Yıllık Akıllı Ekim Rotasyonu (Münavebe) Planı
+            <span id="lblRotationTitle">3 Yıllık Akıllı Ekim Rotasyonu (Münavebe) Planı</span>
           </h2>
-          <p class="section-sub">Toprak azot dengesini korumak ve hastalık döngüsünü kırmak için bölgeye özel hesaplanmıştır.</p>
+          <p class="section-sub" id="lblRotationSub">Toprak azot dengesini korumak ve hastalık döngüsünü kırmak için bölgeye özel hesaplanmıştır.</p>
         </div>
         <span class="pill-sage" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:12px;">
           <i data-lucide="trending-up" style="width:16px;height:16px;"></i>
-          Tahmini Verim Artışı: <span id="rotationYieldBoost">+%18.5</span>
+          <span id="lblYieldBoost">Tahmini Verim Artışı:</span> <span id="rotationYieldBoost">+%18.5</span>
         </span>
       </div>
 
@@ -1167,6 +1229,186 @@
       lucide.createIcons();
     }
 
+    function syncPrintLogo() {
+      const brandLogo = document.getElementById('brandLogo');
+      const printLogo = document.getElementById('printLogo');
+      if (brandLogo && printLogo) {
+        printLogo.src = brandLogo.src;
+      }
+    }
+    syncPrintLogo();
+
+    let currentLang = 'tr';
+    let currentRegionKey = 'icanadolu';
+    let isDroneCompleted = false;
+
+    const uiTranslations = {
+      tr: {
+        pageTitle: "MECMua | Akıllı Tarım, Uydu Analizi & Otonom Filo Yönetimi",
+        brandSubtitle: "Tarımsal Uydu Telemetri & Otonom Saha Yönetimi",
+        logoTooltip: "Büyütmek için üzerine gelin veya dokunun",
+        btnPdf: "A4 PDF Rapor",
+        printMainTitle: "MECMua Tarımsal Saha ve Uydu Analiz Raporu",
+        printDateLabel: "Rapor Tarihi",
+        lblSolar: "Güneş Radyasyonu",
+        noteSolar: "Anlık Sensör Akışı",
+        lblMoisture: "Toprak Nemi (27cm)",
+        calculating: "Hesaplanıyor...",
+        measuring: "Ölçülüyor...",
+        lblNdvi: "NDVI Bitki Sağlığı",
+        noteNdvi: "Klorofil Yoğunluğu",
+        lblWeather: "Rüzgar & Sıcaklık",
+        humidityPrefix: "Bağıl Nem",
+        mapSuffix: "Uydu & İHA Telemetrisi",
+        coordsLabel: "Koordinat",
+        north: "K",
+        east: "D",
+        areaLabel: "Alan",
+        areaUnit: "Dekar",
+        btnStartDrone: "İlaçlama Dronunu Başlat",
+        btnPauseDrone: "Dronu Duraklat",
+        btnResumeDrone: "Devam Et",
+        btnDoneDrone: "Operasyon Tamamlandı",
+        btnResetTitle: "Dronu Üsse Döndür",
+        hudStatus: "AGRAS T40 OTONOM UÇUŞTA",
+        hudAlt: "İrtifa",
+        hudFlow: "Debi",
+        hudFlowVal: "12 L/dk",
+        hudBat: "Batarya",
+        lblSoilProfile: "Toprak & Ekoloji Profili",
+        lblCurrentCrop: "Baskın Ekili Ürün",
+        lblSoilPh: "Toprak pH & Organik",
+        lblSprayStatus: "İHA Operasyon Durumu",
+        lblRegionalCrops: "Bölgeye Uygun Yüksek Verimli Türler",
+        lblAiAnalysisTitle: "Anlık Saha & İklim Analizi",
+        analyzingNote: "Uydu ve meteoroloji istasyonlarından anlık veriler çekilerek analiz ediliyor...",
+        telemetryError: "Canlı meteoroloji servisine ulaşılamadı.",
+        lblAutoTitle: "Özelleştirilebilir Saha Otomasyon Senaryoları",
+        lblLiveTrigger: "Canlı Tetikleme",
+        lblAutoSub: "Anlık sensör verilerine göre otomatik tetiklenen kurallar oluşturun (Örn: Sıcaklık < 10°C ise Sera Isıtıcılarını Aç).",
+        optTemp: "Hava Sıcaklığı (°C)",
+        optMoisture: "Toprak Nemi (%)",
+        optWind: "Rüzgar Hızı (km/s)",
+        optHumidity: "Bağıl Nem (%)",
+        optLess: "Küçüktür (<)",
+        optGreater: "Büyüktür (>)",
+        phThreshold: "Eşik Değer",
+        phAction: "Tetiklenecek Aksiyon (Örn: Sera ısıtıcılarını %80 güçte aç)",
+        btnAddRule: "+ Senaryo Ekle",
+        alertInvalidRule: "Lütfen geçerli bir eşik değer ve aksiyon açıklaması girin.",
+        badgeTriggered: "TETİKLENDİ (AKTİF)",
+        badgeStandby: "BEKLEMEDE",
+        condLabel: "Koşul",
+        liveLabel: "Anlık",
+        delRuleTitle: "Senaryoyu Sil",
+        mTemp: "Hava Sıcaklığı",
+        mMoisture: "Toprak Nemi",
+        mWind: "Rüzgar Hızı",
+        mHumidity: "Bağıl Nem",
+        lblAdviceTitle: "Bölgesel Ziraat & Ekim Takvimi Tavsiyeleri",
+        lblAdviceSub: "Seçili bölgenin mikro-klimasına ve toprak kimyasına göre hazırlanmış saha uygulama rehberi.",
+        lblRotationTitle: "3 Yıllık Akıllı Ekim Rotasyonu (Münavebe) Planı",
+        lblRotationSub: "Toprak azot dengesini korumak ve hastalık döngüsünü kırmak için bölgeye özel hesaplanmıştır.",
+        lblYieldBoost: "Tahmini Verim Artışı:",
+        moistureLow: "Düşük Nem (Sulama Önerilir)",
+        moistureHigh: "Yüksek Doygunluk",
+        moistureOpt: "Optimum Nem Aralığı",
+        sprayHighWind: "Uçuş İptal (Yüksek Rüzgar)",
+        sprayHighTemp: "Gece Uçuşu Önerilir",
+        sprayLowTemp: "Soğuk Hava Beklemesi",
+        sprayReady: "Otonom Uçuşa Uygun",
+        regionsSelect: {
+          icanadolu: "İç Anadolu Bölgesi (Laçin, Eskişehir)",
+          akdeniz: "Akdeniz Bölgesi (Çukurova, Adana)",
+          ege: "Ege Bölgesi (Altıeylül, Balıkesir)",
+          karadeniz: "Karadeniz Bölgesi (Sürmene, Trabzon)",
+          doguanadolu: "Doğu Anadolu Bölgesi (Muş Ovası)"
+        }
+      },
+      en: {
+        pageTitle: "MECMua | Smart Agriculture, Satellite Analytics & Autonomous Fleet",
+        brandSubtitle: "Agricultural Satellite Telemetry & Autonomous Field Management",
+        logoTooltip: "Hover or tap to enlarge logo",
+        btnPdf: "A4 PDF Report",
+        printMainTitle: "MECMua Agricultural Field & Satellite Analysis Report",
+        printDateLabel: "Report Date",
+        lblSolar: "Solar Radiation",
+        noteSolar: "Live Sensor Stream",
+        lblMoisture: "Soil Moisture (27cm)",
+        calculating: "Calculating...",
+        measuring: "Measuring...",
+        lblNdvi: "NDVI Crop Health",
+        noteNdvi: "Chlorophyll Density",
+        lblWeather: "Wind & Temperature",
+        humidityPrefix: "Rel. Humidity",
+        mapSuffix: "Satellite & UAV Telemetry",
+        coordsLabel: "Coordinates",
+        north: "N",
+        east: "E",
+        areaLabel: "Area",
+        areaUnit: "Decares",
+        btnStartDrone: "Launch Spraying Drone",
+        btnPauseDrone: "Pause Drone",
+        btnResumeDrone: "Resume Flight",
+        btnDoneDrone: "Operation Completed",
+        btnResetTitle: "Return Drone to Base",
+        hudStatus: "AGRAS T40 AUTONOMOUS FLIGHT",
+        hudAlt: "Altitude",
+        hudFlow: "Flow Rate",
+        hudFlowVal: "12 L/min",
+        hudBat: "Battery",
+        lblSoilProfile: "Soil & Ecology Profile",
+        lblCurrentCrop: "Dominant Active Crop",
+        lblSoilPh: "Soil pH & Organic Matter",
+        lblSprayStatus: "UAV Operation Status",
+        lblRegionalCrops: "High-Yield Crops Suitable for Region",
+        lblAiAnalysisTitle: "Real-Time Field & Climate Analysis",
+        analyzingNote: "Fetching and analyzing live telemetry from satellite and weather stations...",
+        telemetryError: "Unable to reach live meteorological service.",
+        lblAutoTitle: "Customizable Field Automation Scenarios",
+        lblLiveTrigger: "Live Triggering",
+        lblAutoSub: "Create automated rules triggered by live sensor thresholds (e.g., If Temp < 10°C, Activate Greenhouse Heaters).",
+        optTemp: "Air Temperature (°C)",
+        optMoisture: "Soil Moisture (%)",
+        optWind: "Wind Speed (km/h)",
+        optHumidity: "Relative Humidity (%)",
+        optLess: "Less than (<)",
+        optGreater: "Greater than (>)",
+        phThreshold: "Threshold",
+        phAction: "Triggered Action (e.g., Activate greenhouse heaters at 80%)",
+        btnAddRule: "+ Add Scenario",
+        alertInvalidRule: "Please enter a valid threshold value and action description.",
+        badgeTriggered: "TRIGGERED (ACTIVE)",
+        badgeStandby: "STANDBY",
+        condLabel: "Condition",
+        liveLabel: "Live",
+        delRuleTitle: "Delete Scenario",
+        mTemp: "Air Temp",
+        mMoisture: "Soil Moisture",
+        mWind: "Wind Speed",
+        mHumidity: "Rel. Humidity",
+        lblAdviceTitle: "Regional Agronomy & Planting Calendar Advisory",
+        lblAdviceSub: "Field application guide tailored to the micro-climate and soil chemistry of the selected region.",
+        lblRotationTitle: "3-Year Smart Crop Rotation Plan",
+        lblRotationSub: "Calculated regionally to preserve soil nitrogen balance and break pest/disease cycles.",
+        lblYieldBoost: "Estimated Yield Gain:",
+        moistureLow: "Low Moisture (Irrigation Advised)",
+        moistureHigh: "High Saturation",
+        moistureOpt: "Optimal Moisture Range",
+        sprayHighWind: "Flight Aborted (High Wind)",
+        sprayHighTemp: "Night Flight Recommended",
+        sprayLowTemp: "Cold Weather Hold",
+        sprayReady: "Ready for Autonomous Flight",
+        regionsSelect: {
+          icanadolu: "Central Anatolia (Laçin, Eskişehir)",
+          akdeniz: "Mediterranean Region (Çukurova, Adana)",
+          ege: "Aegean Region (Altıeylül, Balıkesir)",
+          karadeniz: "Black Sea Region (Sürmene, Trabzon)",
+          doguanadolu: "Eastern Anatolia (Muş Plain)"
+        }
+      }
+    };
+
     function createFieldPolygonFromCenter(centerCoords, latOffset = 0.0022, lngOffset = 0.0032) {
       const [lat, lng] = centerCoords;
       return [
@@ -1179,141 +1421,282 @@
 
     const regionsData = {
       icanadolu: {
-        tag: "İç Anadolu",
-        name: "İç Anadolu Bölgesi (Eskişehir - Laçin Ovası)",
         coords: [40.06823, 30.74872],
         zoom: 15,
-        area: "145 Dekar",
+        areaNum: "145",
         ndvi: "0.76",
-        soilBadge: "Killi-Tınlı",
-        currentCrop: "Kışlık Buğday (Bezostaja)",
-        soilPhOrganic: "pH 7.4 • %1.85 Org.",
-        yieldBoost: "+%18.5",
-        cropsVariety: [
-          "Kışlık Buğday", "Arpa (Tarm-92)", "Şeker Pancarı", "Nohut (Azkan)", 
-          "Yağlık Ayçiçeği", "Yeşil Mercimek", "Kimyon", "Aspir", "Kabak Çekirdeği"
-        ],
-        advices: [
-          { title: "Kıraç & Yarı Sulu Alan Yönetimi", detail: "İlkbahar yağışlarını toprakta tutmak için anız bozma işlemini yüzeysel (10-12 cm) yapın; derin sürümden kaçının." },
-          { title: "Süne & Kımıl Mücadelesi", detail: "Başaklanma öncesi kıymetlendirme sürveylerinde m²'de 2+ ergin tespit edilirse drone ile şerit ilaçlama başlatın." },
-          { title: "Çinko & Kükürt Takviyesi", detail: "İç Anadolu topraklarında yüksek pH nedeniyle çinko alımı kısıtlıdır; kardeşlenme döneminde yapraktan çinko sülfat uygulayın." }
-        ],
-        rotation: [
-          { year: "1. Yıl (Mevcut)", crop: "Kışlık Buğday", type: "Tahıl", nitrogen: "-45 kg/da Azot", desc: "Üst toprak katmanını işler. Hasat sonrası anız yakılmamalıdır." },
-          { year: "2. Yıl (Önerilen)", crop: "Nohut / Mercimek", type: "Baklagil", nitrogen: "+35 kg/da Doğal Azot", desc: "Kök bakterileri toprağa doğal azot bağlayarak gübre maliyetini %30 düşürür." },
-          { year: "3. Yıl (Önerilen)", crop: "Yağlık Ayçiçeği", type: "Çapa Bitkisi", nitrogen: "Dengeli Mineral", desc: "Yabancı ot döngüsünü kırar ve kalan azotu yüksek yağ verimine dönüştürür." }
-        ]
+        tr: {
+          tag: "İç Anadolu",
+          name: "İç Anadolu Bölgesi (Eskişehir - Laçin Ovası)",
+          soilBadge: "Killi-Tınlı",
+          currentCrop: "Kışlık Buğday (Bezostaja)",
+          soilPhOrganic: "pH 7.4 • %1.85 Org.",
+          yieldBoost: "+%18.5",
+          cropsVariety: [
+            "Kışlık Buğday", "Arpa (Tarm-92)", "Şeker Pancarı", "Nohut (Azkan)", 
+            "Yağlık Ayçiçeği", "Yeşil Mercimek", "Kimyon", "Aspir", "Kabak Çekirdeği"
+          ],
+          advices: [
+            { title: "Kıraç & Yarı Sulu Alan Yönetimi", detail: "İlkbahar yağışlarını toprakta tutmak için anız bozma işlemini yüzeysel (10-12 cm) yapın; derin sürümden kaçının." },
+            { title: "Süne & Kımıl Mücadelesi", detail: "Başaklanma öncesi kıymetlendirme sürveylerinde m²'de 2+ ergin tespit edilirse drone ile şerit ilaçlama başlatın." },
+            { title: "Çinko & Kükürt Takviyesi", detail: "İç Anadolu topraklarında yüksek pH nedeniyle çinko alımı kısıtlıdır; kardeşlenme döneminde yapraktan çinko sülfat uygulayın." }
+          ],
+          rotation: [
+            { year: "1. Yıl (Mevcut)", crop: "Kışlık Buğday", type: "Tahıl", nitrogen: "-45 kg/da Azot", desc: "Üst toprak katmanını işler. Hasat sonrası anız yakılmamalıdır." },
+            { year: "2. Yıl (Önerilen)", crop: "Nohut / Mercimek", type: "Baklagil", nitrogen: "+35 kg/da Doğal Azot", desc: "Kök bakterileri toprağa doğal azot bağlayarak gübre maliyetini %30 düşürür." },
+            { year: "3. Yıl (Önerilen)", crop: "Yağlık Ayçiçeği", type: "Çapa Bitkisi", nitrogen: "Dengeli Mineral", desc: "Yabancı ot döngüsünü kırar ve kalan azotu yüksek yağ verimine dönüştürür." }
+          ]
+        },
+        en: {
+          tag: "Central Anatolia",
+          name: "Central Anatolia Region (Eskişehir - Laçin Plain)",
+          soilBadge: "Clay-Loam",
+          currentCrop: "Winter Wheat (Bezostaja)",
+          soilPhOrganic: "pH 7.4 • 1.85% Org.",
+          yieldBoost: "+18.5%",
+          cropsVariety: [
+            "Winter Wheat", "Barley (Tarm-92)", "Sugar Beet", "Chickpea (Azkan)", 
+            "Oilseed Sunflower", "Green Lentil", "Cumin", "Safflower", "Pumpkin Seed"
+          ],
+          advices: [
+            { title: "Dryland & Semi-Irrigated Soil Management", detail: "Perform shallow stubble tillage (10-12 cm) to retain spring moisture in the root zone; avoid deep plowing." },
+            { title: "Sunn Pest Control", detail: "If field surveys detect 2+ adults per m² prior to heading, initiate strip spraying via autonomous UAV." },
+            { title: "Zinc & Sulfur Supplementation", detail: "High soil pH limits zinc uptake in Central Anatolia; apply foliar zinc sulfate during the tillering stage." }
+          ],
+          rotation: [
+            { year: "Year 1 (Current)", crop: "Winter Wheat", type: "Cereal", nitrogen: "-45 kg/da Nitrogen", desc: "Works the topsoil layer. Stubble burning must be strictly avoided after harvest." },
+            { year: "Year 2 (Recommended)", crop: "Chickpea / Lentil", type: "Legume", nitrogen: "+35 kg/da Natural N", desc: "Root rhizobia fix atmospheric nitrogen naturally, cutting fertilizer costs by 30%." },
+            { year: "Year 3 (Recommended)", crop: "Oilseed Sunflower", type: "Row Crop", nitrogen: "Balanced Mineral", desc: "Breaks weed cycles and converts residual nitrogen into high oil yield." }
+          ]
+        }
       },
       akdeniz: {
-        tag: "Akdeniz",
-        name: "Akdeniz Bölgesi (Adana - Çukurova)",
         coords: [37.08603, 35.27091],
         zoom: 15,
-        area: "210 Dekar",
+        areaNum: "210",
         ndvi: "0.84",
-        soilBadge: "Alüvyal Toprak",
-        currentCrop: "Birinci Ürün Dane Mısır",
-        soilPhOrganic: "pH 7.1 • %2.40 Org.",
-        yieldBoost: "+%22.0",
-        cropsVariety: [
-          "Dane Mısır", "Pamuk", "Narenciye (Portakal/Limon)", "Soya Fasulyesi", 
-          "Yer Fıstığı", "Karpuz & Kavun", "Erkenci Patates", "Susam", "Avokado"
-        ],
-        advices: [
-          { title: "İkinci Ürün Planlaması", detail: "Buğday hasadının hemen ardından sıfır toprak işleme (doğrudan ekim) ile 2. ürün soya veya silajlık mısır ekerek sezonda çift verim alın." },
-          { title: "Tuzluluk & Drenaj Kontrolü", detail: "Yoğun sulama yapılan alüvyal parsellerde taban suyu yükselmesini önlemek için drenaj kanallarını açık tutun." },
-          { title: "Akdeniz Meyve Sineği & Kurt Kontrolü", detail: "Sıcaklık 26°C üzerine çıktığında feromon tuzaklarını kontrol edin ve biyolojik larvasit uygulamasını akşam serinliğinde yapın." }
-        ],
-        rotation: [
-          { year: "1. Yıl (Mevcut)", crop: "Dane Mısır", type: "Tahıl", nitrogen: "-60 kg/da Azot", desc: "Yüksek biyokütle üretir; hasat sonrası saplar toprağa karıştırılmalıdır." },
-          { year: "2. Yıl (Önerilen)", crop: "Soya Fasulyesi", type: "Baklagil", nitrogen: "+50 kg/da Doğal Azot", desc: "Mısırın tükettiği azotu geri kazandırır ve toprak sıkışmasını önler." },
-          { year: "3. Yıl (Önerilen)", crop: "Pamuk / Yer Fıstığı", type: "Endüstri Bitkisi", nitrogen: "Potasyum Dengeli", desc: "Zararlı döngüsünü sıfırlayarak yüksek lif ve yağ kalitesi sunar." }
-        ]
+        tr: {
+          tag: "Akdeniz",
+          name: "Akdeniz Bölgesi (Adana - Çukurova)",
+          soilBadge: "Alüvyal Toprak",
+          currentCrop: "Birinci Ürün Dane Mısır",
+          soilPhOrganic: "pH 7.1 • %2.40 Org.",
+          yieldBoost: "+%22.0",
+          cropsVariety: [
+            "Dane Mısır", "Pamuk", "Narenciye (Portakal/Limon)", "Soya Fasulyesi", 
+            "Yer Fıstığı", "Karpuz & Kavun", "Erkenci Patates", "Susam", "Avokado"
+          ],
+          advices: [
+            { title: "İkinci Ürün Planlaması", detail: "Buğday hasadının hemen ardından sıfır toprak işleme (doğrudan ekim) ile 2. ürün soya veya silajlık mısır ekerek sezonda çift verim alın." },
+            { title: "Tuzluluk & Drenaj Kontrolü", detail: "Yoğun sulama yapılan alüvyal parsellerde taban suyu yükselmesini önlemek için drenaj kanallarını açık tutun." },
+            { title: "Akdeniz Meyve Sineği & Kurt Kontrolü", detail: "Sıcaklık 26°C üzerine çıktığında feromon tuzaklarını kontrol edin ve biyolojik larvasit uygulamasını akşam serinliğinde yapın." }
+          ],
+          rotation: [
+            { year: "1. Yıl (Mevcut)", crop: "Dane Mısır", type: "Tahıl", nitrogen: "-60 kg/da Azot", desc: "Yüksek biyokütle üretir; hasat sonrası saplar toprağa karıştırılmalıdır." },
+            { year: "2. Yıl (Önerilen)", crop: "Soya Fasulyesi", type: "Baklagil", nitrogen: "+50 kg/da Doğal Azot", desc: "Mısırın tükettiği azotu geri kazandırır ve toprak sıkışmasını önler." },
+            { year: "3. Yıl (Önerilen)", crop: "Pamuk / Yer Fıstığı", type: "Endüstri Bitkisi", nitrogen: "Potasyum Dengeli", desc: "Zararlı döngüsünü sıfırlayarak yüksek lif ve yağ kalitesi sunar." }
+          ]
+        },
+        en: {
+          tag: "Mediterranean",
+          name: "Mediterranean Region (Adana - Çukurova)",
+          soilBadge: "Alluvial Soil",
+          currentCrop: "First-Crop Grain Corn",
+          soilPhOrganic: "pH 7.1 • 2.40% Org.",
+          yieldBoost: "+22.0%",
+          cropsVariety: [
+            "Grain Corn", "Cotton", "Citrus (Orange/Lemon)", "Soybean", 
+            "Peanut", "Watermelon & Melon", "Early Potato", "Sesame", "Avocado"
+          ],
+          advices: [
+            { title: "Second-Crop Double Cropping", detail: "Immediately after wheat harvest, use no-till direct seeding for second-crop soybean or silage corn to double seasonal output." },
+            { title: "Salinity & Drainage Control", detail: "Keep drainage channels clear in heavily irrigated alluvial plots to prevent water table rise and soil salinization." },
+            { title: "Fruit Fly & Bollworm Monitoring", detail: "Check pheromone traps once temperatures exceed 26°C and apply biological larvicides during cooler evening hours." }
+          ],
+          rotation: [
+            { year: "Year 1 (Current)", crop: "Grain Corn", type: "Cereal", nitrogen: "-60 kg/da Nitrogen", desc: "Produces high biomass; crop stalks should be incorporated into the soil post-harvest." },
+            { year: "Year 2 (Recommended)", crop: "Soybean", type: "Legume", nitrogen: "+50 kg/da Natural N", desc: "Replenishes nitrogen depleted by corn and prevents subsoil compaction." },
+            { year: "Year 3 (Recommended)", crop: "Cotton / Peanut", type: "Industrial Crop", nitrogen: "Potassium Balanced", desc: "Resets pest lifecycles while delivering premium fiber and oil quality." }
+          ]
+        }
       },
       ege: {
-        tag: "Ege",
-        name: "Ege Bölgesi (Balıkesir - Altıeylül)",
         coords: [39.63343, 27.70349],
         zoom: 15,
-        area: "160 Dekar",
+        areaNum: "160",
         ndvi: "0.81",
-        soilBadge: "Kumlu-Tınlı Alüvyal",
-        currentCrop: "Salçalık Domates & Mısır",
-        soilPhOrganic: "pH 7.2 • %2.10 Org.",
-        yieldBoost: "+%17.4",
-        cropsVariety: [
-          "Zeytin (Edremit/Gemlik)", "Salçalık Domates", "Çekirdeksiz Üzüm", "Pamuk", 
-          "Tütün", "İncir", "Kapya Biber", "Silajlık Mısır", "Enginar"
-        ],
-        advices: [
-          { title: "Damla Sulama & Fertigasyon", detail: "Kumlu-tınlı toprak su tutma kapasitesi orta seviyede olduğu için azot ve potasyum gübrelerini damla sulama ile bölerek verin." },
-          { title: "Mildiyö & Külleme Erken Uyarısı", detail: "Sabah çiği ve rüzgarsız nemli havalarda bağ ve sebze alanlarında koruyucu bakırlı veya kükürtlü preparatları geciktirmeyin." },
-          { title: "Hasat Öncesi Kalıntı Süresi", detail: "İhracat odaklı yaş sebze ve meyvede pestisit son ilaçlama ile hasat arasındaki bekleme süresine (PHI) tam uyun." }
-        ],
-        rotation: [
-          { year: "1. Yıl (Mevcut)", crop: "Salçalık Domates / Pamuk", type: "Çapa Bitkisi", nitrogen: "-50 kg/da Azot", desc: "Yoğun sulama ve gübreleme sonrası toprak tuzluluğu takip edilmelidir." },
-          { year: "2. Yıl (Önerilen)", crop: "Fiğ / Yem Bezelyesi", type: "Baklagil", nitrogen: "+45 kg/da Doğal Azot", desc: "Yeşil gübreleme ile organik maddeyi artırır, tuzluluğu dengeler." },
-          { year: "3. Yıl (Önerilen)", crop: "Ekmeklik Buğday", type: "Tahıl", nitrogen: "Düşük Gübre İhtiyacı", desc: "Kış yağışlarıyla yetişerek taban suyunu dinlendirir." }
-        ]
+        tr: {
+          tag: "Ege",
+          name: "Ege Bölgesi (Balıkesir - Altıeylül)",
+          soilBadge: "Kumlu-Tınlı Alüvyal",
+          currentCrop: "Salçalık Domates & Mısır",
+          soilPhOrganic: "pH 7.2 • %2.10 Org.",
+          yieldBoost: "+%17.4",
+          cropsVariety: [
+            "Zeytin (Edremit/Gemlik)", "Salçalık Domates", "Çekirdeksiz Üzüm", "Pamuk", 
+            "Tütün", "İncir", "Kapya Biber", "Silajlık Mısır", "Enginar"
+          ],
+          advices: [
+            { title: "Damla Sulama & Fertigasyon", detail: "Kumlu-tınlı toprak su tutma kapasitesi orta seviyede olduğu için azot ve potasyum gübrelerini damla sulama ile bölerek verin." },
+            { title: "Mildiyö & Külleme Erken Uyarısı", detail: "Sabah çiği ve rüzgarsız nemli havalarda bağ ve sebze alanlarında koruyucu bakırlı veya kükürtlü preparatları geciktirmeyin." },
+            { title: "Hasat Öncesi Kalıntı Süresi", detail: "İhracat odaklı yaş sebze ve meyvede pestisit son ilaçlama ile hasat arasındaki bekleme süresine (PHI) tam uyun." }
+          ],
+          rotation: [
+            { year: "1. Yıl (Mevcut)", crop: "Salçalık Domates / Pamuk", type: "Çapa Bitkisi", nitrogen: "-50 kg/da Azot", desc: "Yoğun sulama ve gübreleme sonrası toprak tuzluluğu takip edilmelidir." },
+            { year: "2. Yıl (Önerilen)", crop: "Fiğ / Yem Bezelyesi", type: "Baklagil", nitrogen: "+45 kg/da Doğal Azot", desc: "Yeşil gübreleme ile organik maddeyi artırır, tuzluluğu dengeler." },
+            { year: "3. Yıl (Önerilen)", crop: "Ekmeklik Buğday", type: "Tahıl", nitrogen: "Düşük Gübre İhtiyacı", desc: "Kış yağışlarıyla yetişerek taban suyunu dinlendirir." }
+          ]
+        },
+        en: {
+          tag: "Aegean",
+          name: "Aegean Region (Balıkesir - Altıeylül)",
+          soilBadge: "Sandy-Loam Alluvial",
+          currentCrop: "Processing Tomato & Corn",
+          soilPhOrganic: "pH 7.2 • 2.10% Org.",
+          yieldBoost: "+17.4%",
+          cropsVariety: [
+            "Olive (Edremit/Gemlik)", "Processing Tomato", "Seedless Grape", "Cotton", 
+            "Tobacco", "Fig", "Kapia Pepper", "Silage Corn", "Artichoke"
+          ],
+          advices: [
+            { title: "Drip Irrigation & Fertigation", detail: "Because sandy-loam soils have moderate water retention, split nitrogen and potassium applications via drip fertigation." },
+            { title: "Downy & Powdery Mildew Early Alert", detail: "During calm, humid mornings with heavy dew, apply preventive copper or sulfur treatments promptly in vineyards and vegetables." },
+            { title: "Pre-Harvest Interval (PHI) Compliance", detail: "Strictly observe pre-harvest intervals between final pesticide application and harvest for export-grade produce." }
+          ],
+          rotation: [
+            { year: "Year 1 (Current)", crop: "Tomato / Cotton", type: "Row Crop", nitrogen: "-50 kg/da Nitrogen", desc: "Monitor soil salinity closely following intensive irrigation and fertilization." },
+            { year: "Year 2 (Recommended)", crop: "Vetch / Forage Pea", type: "Legume", nitrogen: "+45 kg/da Natural N", desc: "Boosts organic matter via green manuring and balances soil salinity." },
+            { year: "Year 3 (Recommended)", crop: "Bread Wheat", type: "Cereal", nitrogen: "Low Input Demand", desc: "Thrives on winter rainfall while allowing the groundwater table to recover." }
+          ]
+        }
       },
       karadeniz: {
-        tag: "Karadeniz",
-        name: "Karadeniz Bölgesi (Trabzon - Sürmene)",
         coords: [40.91118, 40.10091],
         zoom: 15,
-        area: "120 Dekar",
+        areaNum: "120",
         ndvi: "0.86",
-        soilBadge: "Organik Asidik Toprak",
-        currentCrop: "Fındık & Çay Bahçesi",
-        soilPhOrganic: "pH 5.8 • %3.45 Org.",
-        yieldBoost: "+%16.0",
-        cropsVariety: [
-          "Fındık (Tombul/Palaz)", "Çay", "Kivi", "Mısır (Karadeniz Yerel)", 
-          "Karalahana", "Çeltik (Delta)", "Kokulu Üzüm", "Yaban Mersini (Likapa)"
-        ],
-        advices: [
-          { title: "Toprak pH Dengeleme (Kireçleme)", detail: "Yüksek yağış nedeniyle yıkanan ve asitleşen topraklarda (pH < 6.0) sonbaharda tarım kireci uygulayarak besin alımını açın." },
-          { title: "Kahverengi Kokarca & Fındık Kurdu", detail: "Nisan-Mayıs döneminde zararlı popülasyonunu feromon tuzaklarıyla izleyin; eğimli arazilerde traktör yerine drone ile ilaçlama yapın." },
-          { title: "Erozyon & Teraslama", detail: "Eğimli bahçelerde sıra aralarında doğal örtü bitkisi bırakarak şiddetli yağışlarda üst toprak kaybını önleyin." }
-        ],
-        rotation: [
-          { year: "1. Yıl (Mevcut)", crop: "Mısır / Sebze", type: "Tahıl", nitrogen: "-55 kg/da Azot", desc: "Yüksek yağış rejiminde azot yıkanmasına karşı yavaş salınımlı gübre tercih edilir." },
-          { year: "2. Yıl (Önerilen)", crop: "Kışlık Bakla / Korunga", type: "Baklagil", nitrogen: "+40 kg/da Doğal Azot", desc: "Ağır ve nemli toprağı kökleriyle havalandırır, erozyonu önler." },
-          { year: "3. Yıl (Önerilen)", crop: "Yem Bitkileri / Likapa", type: "Özel Tür", nitrogen: "Asidik Toprak Uyumu", desc: "Bölgenin doğal düşük pH yapısına tam uyum sağlayarak yüksek katma değer üretir." }
-        ]
+        tr: {
+          tag: "Karadeniz",
+          name: "Karadeniz Bölgesi (Trabzon - Sürmene)",
+          soilBadge: "Organik Asidik Toprak",
+          currentCrop: "Fındık & Çay Bahçesi",
+          soilPhOrganic: "pH 5.8 • %3.45 Org.",
+          yieldBoost: "+%16.0",
+          cropsVariety: [
+            "Fındık (Tombul/Palaz)", "Çay", "Kivi", "Mısır (Karadeniz Yerel)", 
+            "Karalahana", "Çeltik (Delta)", "Kokulu Üzüm", "Yaban Mersini (Likapa)"
+          ],
+          advices: [
+            { title: "Toprak pH Dengeleme (Kireçleme)", detail: "Yüksek yağış nedeniyle yıkanan ve asitleşen topraklarda (pH < 6.0) sonbaharda tarım kireci uygulayarak besin alımını açın." },
+            { title: "Kahverengi Kokarca & Fındık Kurdu", detail: "Nisan-Mayıs döneminde zararlı popülasyonunu feromon tuzaklarıyla izleyin; eğimli arazilerde traktör yerine drone ile ilaçlama yapın." },
+            { title: "Erozyon & Teraslama", detail: "Eğimli bahçelerde sıra aralarında doğal örtü bitkisi bırakarak şiddetli yağışlarda üst toprak kaybını önleyin." }
+          ],
+          rotation: [
+            { year: "1. Yıl (Mevcut)", crop: "Mısır / Sebze", type: "Tahıl", nitrogen: "-55 kg/da Azot", desc: "Yüksek yağış rejiminde azot yıkanmasına karşı yavaş salınımlı gübre tercih edilir." },
+            { year: "2. Yıl (Önerilen)", crop: "Kışlık Bakla / Korunga", type: "Baklagil", nitrogen: "+40 kg/da Doğal Azot", desc: "Ağır ve nemli toprağı kökleriyle havalandırır, erozyonu önler." },
+            { year: "3. Yıl (Önerilen)", crop: "Yem Bitkileri / Likapa", type: "Özel Tür", nitrogen: "Asidik Toprak Uyumu", desc: "Bölgenin doğal düşük pH yapısına tam uyum sağlayarak yüksek katma değer üretir." }
+          ]
+        },
+        en: {
+          tag: "Black Sea",
+          name: "Black Sea Region (Trabzon - Sürmene)",
+          soilBadge: "Organic Acidic Soil",
+          currentCrop: "Hazelnut & Tea Orchard",
+          soilPhOrganic: "pH 5.8 • 3.45% Org.",
+          yieldBoost: "+16.0%",
+          cropsVariety: [
+            "Hazelnut (Tombul/Palaz)", "Tea", "Kiwifruit", "Heirloom Corn", 
+            "Black Kale", "Paddy Rice (Delta)", "Isabella Grape", "Blueberry (Likapa)"
+          ],
+          advices: [
+            { title: "Soil pH Balancing (Agricultural Liming)", detail: "In leached acidic soils (pH < 6.0) caused by heavy rainfall, apply agricultural lime in autumn to unlock nutrient availability." },
+            { title: "Brown Marmorated Stink Bug & Weevil", detail: "Monitor pest populations with pheromone traps in April-May; use spraying drones instead of tractors on steep slopes." },
+            { title: "Erosion Control & Cover Crops", detail: "Maintain natural ground cover between rows on sloped orchards to prevent topsoil runoff during heavy rainstorms." }
+          ],
+          rotation: [
+            { year: "Year 1 (Current)", crop: "Corn / Vegetables", type: "Cereal", nitrogen: "-55 kg/da Nitrogen", desc: "Slow-release fertilizers are preferred to prevent nitrogen leaching under high rainfall." },
+            { year: "Year 2 (Recommended)", crop: "Winter Fava Bean / Sainfoin", type: "Legume", nitrogen: "+40 kg/da Natural N", desc: "Aerates heavy, moist soil with deep roots and prevents slope erosion." },
+            { year: "Year 3 (Recommended)", crop: "Forage Crops / Blueberry", type: "Specialty Crop", nitrogen: "Acidic Soil Adapted", desc: "Naturally thrives in low-pH soils to generate high value-added yield." }
+          ]
+        }
       },
       doguanadolu: {
-        tag: "Doğu Anadolu",
-        name: "Doğu Anadolu Bölgesi (Muş Ovası)",
         coords: [38.76242, 41.46689],
         zoom: 15,
-        area: "240 Dekar",
+        areaNum: "240",
         ndvi: "0.72",
-        soilBadge: "Kestanerengi Tınlı",
-        currentCrop: "Şeker Pancarı & Yem Bitkileri",
-        soilPhOrganic: "pH 7.5 • %1.95 Org.",
-        yieldBoost: "+%20.1",
-        cropsVariety: [
-          "Şeker Pancarı", "Yonca", "Korunga", "Yazlık Arpa", 
-          "Kışlık Çavdar", "Patates", "Kayısı (Malatya/Iğdır)", "Fiğ", "Silajlık Mısır"
-        ],
-        advices: [
-          { title: "Kısa Vejetasyon & Erken Don Koruması", detail: "İlkbahar geç donları ve sonbahar erken donlarına karşı soğuğa dayanıklı sertifikalı çeşitler kullanın; gece 4°C altında yağmurlama don sulaması hazırlığı yapın." },
-          { title: "Kaba Yem & Hayvancılık Entegrasyonu", detail: "Tahıl hasadı sonrası yonca ve korunga ekimiyle hem yüksek proteinli kaba yem üretin hem de ahır gübresini kompostlayarak toprağa geri kazandırın." },
-          { title: "Pancar Kist Nematodu Önlemi", detail: "Şeker pancarı ekilen parsellerde en az 3 yıl üst üste pancar ekmeyin; araya mutlaka tahıl ve baklagil sokun." }
-        ],
-        rotation: [
-          { year: "1. Yıl (Mevcut)", crop: "Şeker Pancarı", type: "Çapa Bitkisi", nitrogen: "-55 kg/da Azot", desc: "Derin kök sistemi toprağı işler ancak kist nematodu riskine karşı münavebe şarttır." },
-          { year: "2. Yıl (Önerilen)", crop: "Arpa / Yulaf", type: "Tahıl", nitrogen: "-35 kg/da Azot", desc: "Kısa vejetasyon süresine uygundur, nematod popülasyonunu baskılar." },
-          { year: "3. Yıl (Önerilen)", crop: "Yonca / Korunga", type: "Baklagil Yem", nitrogen: "+60 kg/da Doğal Azot", desc: "Bölge hayvancılığına kaliteli kaba yem sağlarken toprağı tamamen yeniler." }
-        ]
+        tr: {
+          tag: "Doğu Anadolu",
+          name: "Doğu Anadolu Bölgesi (Muş Ovası)",
+          soilBadge: "Kestanerengi Tınlı",
+          currentCrop: "Şeker Pancarı & Yem Bitkileri",
+          soilPhOrganic: "pH 7.5 • %1.95 Org.",
+          yieldBoost: "+%20.1",
+          cropsVariety: [
+            "Şeker Pancarı", "Yonca", "Korunga", "Yazlık Arpa", 
+            "Kışlık Çavdar", "Patates", "Kayısı (Malatya/Iğdır)", "Fiğ", "Silajlık Mısır"
+          ],
+          advices: [
+            { title: "Kısa Vejetasyon & Erken Don Koruması", detail: "İlkbahar geç donları ve sonbahar erken donlarına karşı soğuğa dayanıklı sertifikalı çeşitler kullanın; gece 4°C altında yağmurlama don sulaması hazırlığı yapın." },
+            { title: "Kaba Yem & Hayvancılık Entegrasyonu", detail: "Tahıl hasadı sonrası yonca ve korunga ekimiyle hem yüksek proteinli kaba yem üretin hem de ahır gübresini kompostlayarak toprağa geri kazandırın." },
+            { title: "Pancar Kist Nematodu Önlemi", detail: "Şeker pancarı ekilen parsellerde en az 3 yıl üst üste pancar ekmeyin; araya mutlaka tahıl ve baklagil sokun." }
+          ],
+          rotation: [
+            { year: "1. Yıl (Mevcut)", crop: "Şeker Pancarı", type: "Çapa Bitkisi", nitrogen: "-55 kg/da Azot", desc: "Derin kök sistemi toprağı işler ancak kist nematodu riskine karşı münavebe şarttır." },
+            { year: "2. Yıl (Önerilen)", crop: "Arpa / Yulaf", type: "Tahıl", nitrogen: "-35 kg/da Azot", desc: "Kısa vejetasyon süresine uygundur, nematod popülasyonunu baskılar." },
+            { year: "3. Yıl (Önerilen)", crop: "Yonca / Korunga", type: "Baklagil Yem", nitrogen: "+60 kg/da Doğal Azot", desc: "Bölge hayvancılığına kaliteli kaba yem sağlarken toprağı tamamen yeniler." }
+          ]
+        },
+        en: {
+          tag: "Eastern Anatolia",
+          name: "Eastern Anatolia Region (Muş Plain)",
+          soilBadge: "Chestnut Loam",
+          currentCrop: "Sugar Beet & Forage Crops",
+          soilPhOrganic: "pH 7.5 • 1.95% Org.",
+          yieldBoost: "+20.1%",
+          cropsVariety: [
+            "Sugar Beet", "Alfalfa", "Sainfoin", "Spring Barley", 
+            "Winter Rye", "Potato", "Apricot (Malatya/Iğdır)", "Vetch", "Silage Corn"
+          ],
+          advices: [
+            { title: "Short Growing Season & Frost Protection", detail: "Use certified cold-hardy cultivars against late spring and early autumn frosts; prepare overhead frost-protection sprinklers below 4°C." },
+            { title: "Forage & Livestock Integration", detail: "Follow cereal harvests with alfalfa and sainfoin to produce high-protein forage while returning composted manure to the soil." },
+            { title: "Sugar Beet Cyst Nematode Prevention", detail: "Never plant sugar beets consecutively on the same plot for at least 3 years; rotate with cereals and legumes." }
+          ],
+          rotation: [
+            { year: "Year 1 (Current)", crop: "Sugar Beet", type: "Row Crop", nitrogen: "-55 kg/da Nitrogen", desc: "Deep roots condition the soil, but rotation is mandatory to prevent cyst nematodes." },
+            { year: "Year 2 (Recommended)", crop: "Barley / Oats", type: "Cereal", nitrogen: "-35 kg/da Nitrogen", desc: "Well-suited for short growing windows and suppresses nematode populations." },
+            { year: "Year 3 (Recommended)", crop: "Alfalfa / Sainfoin", type: "Forage Legume", nitrogen: "+60 kg/da Natural N", desc: "Supplies high-grade livestock forage while fully regenerating soil fertility." }
+          ]
+        }
       }
     };
 
     let customRules = [
-      { id: 1, metric: 'temp', operator: '<', threshold: 10, action: 'Sera ısıtıcılarını ve don koruma perdelerini aktif et' },
-      { id: 2, metric: 'moisture', operator: '<', threshold: 30, action: 'Otomatik damla sulama vanalarını 45 dk aç' },
-      { id: 3, metric: 'wind', operator: '>', threshold: 18, action: 'İlaçlama dronlarını güvenli iniş moduna al' }
+      {
+        id: 1,
+        metric: 'temp',
+        operator: '<',
+        threshold: 10,
+        actionTr: 'Sera ısıtıcılarını ve don koruma perdelerini aktif et',
+        actionEn: 'Activate greenhouse heaters and frost protection curtains'
+      },
+      {
+        id: 2,
+        metric: 'moisture',
+        operator: '<',
+        threshold: 30,
+        actionTr: 'Otomatik damla sulama vanalarını 45 dk aç',
+        actionEn: 'Open automated drip irrigation valves for 45 mins'
+      },
+      {
+        id: 3,
+        metric: 'wind',
+        operator: '>',
+        threshold: 18,
+        actionTr: 'İlaçlama dronlarını güvenli iniş moduna al',
+        actionEn: 'Switch spraying drones to safe return-to-home landing mode'
+      }
     ];
 
     let latestLiveMetrics = { temp: 15, moisture: 25, wind: 10, humidity: 50 };
@@ -1354,6 +1737,94 @@
       iconAnchor: [24, 24]
     });
 
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      document.getElementById('langBtnTr').classList.toggle('active', lang === 'tr');
+      document.getElementById('langBtnEn').classList.toggle('active', lang === 'en');
+
+      const t = uiTranslations[lang];
+      document.title = t.pageTitle;
+      document.getElementById('brandSubtitle').textContent = t.brandSubtitle;
+      document.getElementById('logoBox').title = t.logoTooltip;
+      document.getElementById('btnPdfText').textContent = t.btnPdf;
+      document.getElementById('printMainTitle').textContent = t.printMainTitle;
+      document.getElementById('printDateLabel').textContent = t.printDateLabel;
+
+      document.getElementById('lblSolar').textContent = t.lblSolar;
+      document.getElementById('noteSolar').textContent = t.noteSolar;
+      document.getElementById('lblMoisture').textContent = t.lblMoisture;
+      document.getElementById('lblNdvi').textContent = t.lblNdvi;
+      document.getElementById('noteNdvi').textContent = t.noteNdvi;
+      document.getElementById('lblWeather').textContent = t.lblWeather;
+
+      document.getElementById('btnResetDrone').title = t.btnResetTitle;
+      document.getElementById('hudStatusText').textContent = t.hudStatus;
+      document.getElementById('hudAltLabel').textContent = t.hudAlt;
+      document.getElementById('hudFlowLabel').textContent = t.hudFlow;
+      document.getElementById('hudFlowVal').textContent = t.hudFlowVal;
+      document.getElementById('hudBatLabel').textContent = t.hudBat;
+
+      document.getElementById('lblSoilProfile').textContent = t.lblSoilProfile;
+      document.getElementById('lblCurrentCrop').textContent = t.lblCurrentCrop;
+      document.getElementById('lblSoilPh').textContent = t.lblSoilPh;
+      document.getElementById('lblSprayStatus').textContent = t.lblSprayStatus;
+      document.getElementById('lblRegionalCrops').textContent = t.lblRegionalCrops;
+      document.getElementById('lblAiAnalysisTitle').textContent = t.lblAiAnalysisTitle;
+
+      document.getElementById('lblAutoTitle').textContent = t.lblAutoTitle;
+      document.getElementById('lblLiveTrigger').textContent = t.lblLiveTrigger;
+      document.getElementById('lblAutoSub').textContent = t.lblAutoSub;
+
+      const metricSel = document.getElementById('ruleMetric');
+      metricSel.options[0].text = t.optTemp;
+      metricSel.options[1].text = t.optMoisture;
+      metricSel.options[2].text = t.optWind;
+      metricSel.options[3].text = t.optHumidity;
+
+      const opSel = document.getElementById('ruleOperator');
+      opSel.options[0].text = t.optLess;
+      opSel.options[1].text = t.optGreater;
+
+      document.getElementById('ruleThreshold').placeholder = t.phThreshold;
+      document.getElementById('ruleAction').placeholder = t.phAction;
+      document.getElementById('btnAddRule').textContent = t.btnAddRule;
+
+      document.getElementById('lblAdviceTitle').textContent = t.lblAdviceTitle;
+      document.getElementById('lblAdviceSub').textContent = t.lblAdviceSub;
+      document.getElementById('lblRotationTitle').textContent = t.lblRotationTitle;
+      document.getElementById('lblRotationSub').textContent = t.lblRotationSub;
+      document.getElementById('lblYieldBoost').textContent = t.lblYieldBoost;
+
+      const regionSel = document.getElementById('regionSelect');
+      Array.from(regionSel.options).forEach(opt => {
+        if (t.regionsSelect[opt.value]) {
+          opt.text = t.regionsSelect[opt.value];
+        }
+      });
+
+      updateDroneButtonLabel();
+      renderRegionUI(currentRegionKey);
+      renderLiveDiagnostics();
+      evaluateAndRenderRules();
+    }
+
+    function updateDroneButtonLabel() {
+      const btn = document.getElementById('btnStartDrone');
+      const t = uiTranslations[currentLang];
+      if (isDroneFlying) {
+        btn.innerHTML = `<i data-lucide="pause" style="width:14px;height:14px;"></i><span>${t.btnPauseDrone}</span>`;
+      } else if (isDroneCompleted) {
+        btn.innerHTML = `<i data-lucide="check-circle" style="width:14px;height:14px;"></i><span>${t.btnDoneDrone}</span>`;
+      } else if (currentStep > 0) {
+        btn.innerHTML = `<i data-lucide="play" style="width:14px;height:14px;"></i><span>${t.btnResumeDrone}</span>`;
+      } else {
+        btn.innerHTML = `<i data-lucide="play" style="width:14px;height:14px;"></i><span>${t.btnStartDrone}</span>`;
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
     function generateFlightWaypoints(polyCoords) {
       const minLat = Math.min(...polyCoords.map(c => c[0])) + 0.00025;
       const maxLat = Math.max(...polyCoords.map(c => c[0])) - 0.00025;
@@ -1391,29 +1862,33 @@
 
     function evaluateAndRenderRules() {
       const container = document.getElementById('automationRulesList');
+      const t = uiTranslations[currentLang];
+      const speedUnit = currentLang === 'tr' ? ' km/s' : ' km/h';
+
       const metricLabels = {
-        temp: { name: 'Hava Sıcaklığı', unit: '°C', val: latestLiveMetrics.temp },
-        moisture: { name: 'Toprak Nemi', unit: '%', val: latestLiveMetrics.moisture },
-        wind: { name: 'Rüzgar Hızı', unit: ' km/s', val: latestLiveMetrics.wind },
-        humidity: { name: 'Bağıl Nem', unit: '%', val: latestLiveMetrics.humidity }
+        temp: { name: t.mTemp, unit: '°C', val: latestLiveMetrics.temp },
+        moisture: { name: t.mMoisture, unit: '%', val: latestLiveMetrics.moisture },
+        wind: { name: t.mWind, unit: speedUnit, val: latestLiveMetrics.wind },
+        humidity: { name: t.mHumidity, unit: '%', val: latestLiveMetrics.humidity }
       };
 
       container.innerHTML = customRules.map(rule => {
         const m = metricLabels[rule.metric];
         const isTriggered = rule.operator === '<' ? (m.val < rule.threshold) : (m.val > rule.threshold);
+        const actionText = currentLang === 'tr' ? (rule.actionTr || rule.actionEn) : (rule.actionEn || rule.actionTr);
 
         return `
           <div class="rule-item ${isTriggered ? 'is-triggered' : ''}">
             <div>
               <div>
-                <span class="rule-badge">${isTriggered ? 'TETİKLENDİ (AKTİF)' : 'BEKLEMEDE'}</span>
+                <span class="rule-badge">${isTriggered ? t.badgeTriggered : t.badgeStandby}</span>
                 <span class="rule-cond">
-                  Koşul: ${m.name} ${rule.operator} ${rule.threshold}${m.unit} <span style="color:#646B66;font-weight:400;">(Anlık: ${m.val}${m.unit})</span>
+                  ${t.condLabel}: ${m.name} ${rule.operator} ${rule.threshold}${m.unit} <span style="color:#646B66;font-weight:400;">(${t.liveLabel}: ${m.val}${m.unit})</span>
                 </span>
               </div>
-              <p class="rule-act">→ ${rule.action}</p>
+              <p class="rule-act">→ ${actionText}</p>
             </div>
-            <button onclick="deleteRule(${rule.id})" class="btn-del no-print" title="Senaryoyu Sil">
+            <button onclick="deleteRule(${rule.id})" class="btn-del no-print" title="${t.delRuleTitle}">
               <i data-lucide="trash-2" style="width:16px;height:16px;"></i>
             </button>
           </div>
@@ -1423,17 +1898,25 @@
     }
 
     function addCustomRule() {
+      const t = uiTranslations[currentLang];
       const metric = document.getElementById('ruleMetric').value;
       const operator = document.getElementById('ruleOperator').value;
       const threshold = parseFloat(document.getElementById('ruleThreshold').value);
       const action = document.getElementById('ruleAction').value.trim();
 
       if (isNaN(threshold) || !action) {
-        alert("Lütfen geçerli bir eşik değer ve aksiyon açıklaması girin.");
+        alert(t.alertInvalidRule);
         return;
       }
 
-      customRules.unshift({ id: Date.now(), metric, operator, threshold, action });
+      customRules.unshift({
+        id: Date.now(),
+        metric,
+        operator,
+        threshold,
+        actionTr: action,
+        actionEn: action
+      });
       document.getElementById('ruleAction').value = '';
       evaluateAndRenderRules();
     }
@@ -1443,11 +1926,60 @@
       evaluateAndRenderRules();
     }
 
-    async function fetchLiveTelemetryAndAnalyze(lat, lon, regionData) {
-      document.getElementById('statSolar').textContent = "Ölçülüyor...";
-      document.getElementById('statMoisture').textContent = "Ölçülüyor...";
-      document.getElementById('statWeather').textContent = "Ölçülüyor...";
-      document.getElementById('aiSummaryNote').textContent = "Uydu ve meteoroloji istasyonlarından anlık veriler çekilerek analiz ediliyor...";
+    function renderLiveDiagnostics() {
+      const t = uiTranslations[currentLang];
+      const baseRegion = regionsData[currentRegionKey];
+      const regLoc = baseRegion[currentLang];
+      const { temp, moisture: soilMoisturePct, wind, humidity } = latestLiveMetrics;
+      const speedUnit = currentLang === 'tr' ? 'km/s' : 'km/h';
+
+      document.getElementById('statMoisture').textContent = currentLang === 'tr' ? `%${soilMoisturePct}` : `${soilMoisturePct}%`;
+      document.getElementById('statWeather').textContent = `${wind} ${speedUnit} • ${temp}°C`;
+      document.getElementById('statHumidityNote').textContent = currentLang === 'tr'
+        ? `${t.humidityPrefix}: %${humidity}`
+        : `${t.humidityPrefix}: ${humidity}%`;
+      document.getElementById('statNdvi').textContent = baseRegion.ndvi;
+
+      let moistureStatus = soilMoisturePct < 20
+        ? t.moistureLow
+        : (soilMoisturePct > 36 ? t.moistureHigh : t.moistureOpt);
+      document.getElementById('statMoistureNote').textContent = moistureStatus;
+
+      let sprayAdvice = "";
+      let aiAdvice = "";
+
+      if (wind > 18) {
+        sprayAdvice = t.sprayHighWind;
+        aiAdvice = currentLang === 'tr'
+          ? `${regLoc.tag} sahasında anlık rüzgar ${wind} km/s. Sürüklenme (drift) riski nedeniyle İHA ilaçlaması durdurulmalıdır.`
+          : `Live wind speed in ${regLoc.tag} is ${wind} km/h. Autonomous UAV spraying must be halted due to spray drift risk.`;
+      } else if (temp > 30) {
+        sprayAdvice = t.sprayHighTemp;
+        aiAdvice = currentLang === 'tr'
+          ? `Sıcaklık ${temp}°C ve nem %${humidity}. Yüksek buharlaşma kaybını önlemek için ilaçlamayı gün batımından sonraya bırakın.`
+          : `Temperature is ${temp}°C with ${humidity}% humidity. Schedule spraying after sunset to prevent rapid evaporation loss.`;
+      } else if (temp < 6) {
+        sprayAdvice = t.sprayLowTemp;
+        aiAdvice = currentLang === 'tr'
+          ? `Anlık sıcaklık ${temp}°C. Bitki stoma aktivitesi düşük olduğu için yaprak gübresi ve sistemik ilaç emilimi zayıf kalacaktır.`
+          : `Current temperature is ${temp}°C. Low leaf stomata activity will limit systemic pesticide and foliar fertilizer absorption.`;
+      } else {
+        sprayAdvice = t.sprayReady;
+        aiAdvice = currentLang === 'tr'
+          ? `${regLoc.tag} bölgesinde ${temp}°C sıcaklık, %${humidity} nem ve ${wind} km/s rüzgar ile drone ilaçlaması için optimum pencere açık. Toprak nemi (%${soilMoisturePct}) kök gelişimini destekliyor.`
+          : `Optimal window open for drone spraying in ${regLoc.tag} at ${temp}°C, ${humidity}% humidity, and ${wind} km/h wind. Soil moisture (${soilMoisturePct}%) supports healthy root uptake.`;
+      }
+
+      document.getElementById('sprayAdvice').textContent = sprayAdvice;
+      document.getElementById('aiSummaryNote').textContent = aiAdvice;
+    }
+
+    async function fetchLiveTelemetryAndAnalyze(lat, lon) {
+      const t = uiTranslations[currentLang];
+      document.getElementById('statSolar').textContent = t.measuring;
+      document.getElementById('statMoisture').textContent = t.measuring;
+      document.getElementById('statWeather').textContent = t.measuring;
+      document.getElementById('aiSummaryNote').textContent = t.analyzingNote;
 
       try {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,shortwave_radiation&hourly=soil_moisture_9_to_27cm&timezone=Europe%2FIstanbul`;
@@ -1466,61 +1998,35 @@
         latestLiveMetrics = { temp, moisture: soilMoisturePct, wind, humidity };
 
         document.getElementById('statSolar').textContent = `${radiation} W/m²`;
-        document.getElementById('statMoisture').textContent = `%${soilMoisturePct}`;
-        document.getElementById('statWeather').textContent = `${wind} km/s • ${temp}°C`;
-        document.getElementById('statHumidityNote').textContent = `Bağıl Nem: %${humidity}`;
-        document.getElementById('statNdvi').textContent = regionData.ndvi;
-
-        let moistureStatus = soilMoisturePct < 20 ? "Düşük Nem (Sulama Önerilir)" : (soilMoisturePct > 36 ? "Yüksek Doygunluk" : "Optimum Nem Aralığı");
-        document.getElementById('statMoistureNote').textContent = moistureStatus;
-
-        let sprayAdvice = "";
-        let aiAdvice = "";
-
-        if (wind > 18) {
-          sprayAdvice = "Uçuş İptal (Yüksek Rüzgar)";
-          aiAdvice = `${regionData.tag} sahasında anlık rüzgar ${wind} km/s. Sürüklenme (drift) riski nedeniyle İHA ilaçlaması durdurulmalıdır.`;
-        } else if (temp > 30) {
-          sprayAdvice = "Gece Uçuşu Önerilir";
-          aiAdvice = `Sıcaklık ${temp}°C ve nem %${humidity}. Yüksek buharlaşma kaybını önlemek için ilaçlamayı gün batımından sonraya bırakın.`;
-        } else if (temp < 6) {
-          sprayAdvice = "Soğuk Hava Beklemesi";
-          aiAdvice = `Anlık sıcaklık ${temp}°C. Bitki stoma aktivitesi düşük olduğu için yaprak gübresi ve sistemik ilaç emilimi zayıf kalacaktır.`;
-        } else {
-          sprayAdvice = "Otonom Uçuşa Uygun";
-          aiAdvice = `${regionData.tag} bölgesinde ${temp}°C sıcaklık, %${humidity} nem ve ${wind} km/s rüzgar ile drone ilaçlaması için optimum pencere açık. Toprak nemi (%${soilMoisturePct}) kök gelişimini destekliyor.`;
-        }
-
-        document.getElementById('sprayAdvice').textContent = sprayAdvice;
-        document.getElementById('aiSummaryNote').textContent = aiAdvice;
-
+        renderLiveDiagnostics();
         evaluateAndRenderRules();
 
       } catch (error) {
-        console.error("Telemetri hatası:", error);
-        document.getElementById('aiSummaryNote').textContent = "Canlı meteoroloji servisine ulaşılamadı.";
+        console.error("Telemetry error:", error);
+        document.getElementById('aiSummaryNote').textContent = uiTranslations[currentLang].telemetryError;
       }
     }
 
-    async function changeRegion(regionKey) {
-      resetDrone();
-      const data = regionsData[regionKey];
+    function renderRegionUI(regionKey) {
+      const baseData = regionsData[regionKey];
+      const locData = baseData[currentLang];
+      const t = uiTranslations[currentLang];
 
-      document.getElementById('mapTitle').textContent = `${data.name} - Uydu & İHA Telemetrisi`;
-      document.getElementById('mapCoords').textContent = `Koordinat: ${data.coords[0].toFixed(5)}° K, ${data.coords[1].toFixed(5)}° D • Alan: ${data.area}`;
-      document.getElementById('printRegionSubtitle').textContent = `Bölge: ${data.name} | Alan: ${data.area} | Canlı Telemetri Çıktısı`;
+      document.getElementById('mapTitle').textContent = `${locData.name} - ${t.mapSuffix}`;
+      document.getElementById('mapCoords').textContent = `${t.coordsLabel}: ${baseData.coords[0].toFixed(5)}° ${t.north}, ${baseData.coords[1].toFixed(5)}° ${t.east} • ${t.areaLabel}: ${baseData.areaNum} ${t.areaUnit}`;
+      document.getElementById('printRegionSubtitle').textContent = `${locData.name} | ${t.areaLabel}: ${baseData.areaNum} ${t.areaUnit}`;
 
-      document.getElementById('soilBadge').textContent = data.soilBadge;
-      document.getElementById('currentCrop').textContent = data.currentCrop;
-      document.getElementById('soilPhOrganic').textContent = data.soilPhOrganic;
-      document.getElementById('rotationYieldBoost').textContent = data.yieldBoost;
-      document.getElementById('adviceRegionTag').textContent = data.tag;
+      document.getElementById('soilBadge').textContent = locData.soilBadge;
+      document.getElementById('currentCrop').textContent = locData.currentCrop;
+      document.getElementById('soilPhOrganic').textContent = locData.soilPhOrganic;
+      document.getElementById('rotationYieldBoost').textContent = locData.yieldBoost;
+      document.getElementById('adviceRegionTag').textContent = locData.tag;
 
-      document.getElementById('regionalCropsList').innerHTML = data.cropsVariety.map(crop => `
+      document.getElementById('regionalCropsList').innerHTML = locData.cropsVariety.map(crop => `
         <span class="crop-chip">${crop}</span>
       `).join('');
 
-      document.getElementById('regionalAdviceList').innerHTML = data.advices.map(adv => `
+      document.getElementById('regionalAdviceList').innerHTML = locData.advices.map(adv => `
         <div class="advice-item">
           <h4 class="advice-title">
             <span class="dot-amber"></span>
@@ -1530,7 +2036,7 @@
         </div>
       `).join('');
 
-      document.getElementById('rotationCards').innerHTML = data.rotation.map((item, index) => `
+      document.getElementById('rotationCards').innerHTML = locData.rotation.map((item, index) => `
         <div class="rotation-card ${index === 1 ? 'is-recommended' : ''}">
           <div class="rot-top">
             <span class="rot-year">${item.year}</span>
@@ -1541,14 +2047,22 @@
           <p class="rot-desc">${item.desc}</p>
         </div>
       `).join('');
+    }
 
-      map.flyTo(data.coords, data.zoom, { duration: 1.2 });
+    async function changeRegion(regionKey) {
+      currentRegionKey = regionKey;
+      resetDrone();
+      const baseData = regionsData[regionKey];
+
+      renderRegionUI(regionKey);
+
+      map.flyTo(baseData.coords, baseData.zoom, { duration: 1.2 });
 
       if (fieldPolygon) map.removeLayer(fieldPolygon);
       if (flightPathLine) map.removeLayer(flightPathLine);
       if (droneMarker) map.removeLayer(droneMarker);
 
-      const activePolygonCoords = createFieldPolygonFromCenter(data.coords);
+      const activePolygonCoords = createFieldPolygonFromCenter(baseData.coords);
 
       fieldPolygon = L.polygon(activePolygonCoords, {
         color: '#E5B97B',
@@ -1569,7 +2083,7 @@
 
       droneMarker = L.marker(currentWaypoints[0], { icon: droneIcon }).addTo(map);
 
-      await fetchLiveTelemetryAndAnalyze(data.coords[0], data.coords[1], data);
+      await fetchLiveTelemetryAndAnalyze(baseData.coords[0], baseData.coords[1]);
     }
 
     function toggleDroneSimulation() {
@@ -1580,38 +2094,43 @@
       if (isDroneFlying) {
         clearInterval(droneInterval);
         isDroneFlying = false;
-        btn.innerHTML = `<i data-lucide="play" style="width:14px;height:14px;"></i><span>Devam Et</span>`;
         btn.classList.remove('is-paused');
         if (sprayRing) sprayRing.classList.add('hidden');
-        if (window.lucide) lucide.createIcons();
+        updateDroneButtonLabel();
         return;
+      }
+
+      if (isDroneCompleted) {
+        currentStep = 0;
+        isDroneCompleted = false;
+        btn.classList.remove('is-done');
       }
 
       isDroneFlying = true;
       hud.classList.remove('hidden');
       if (sprayRing) sprayRing.classList.remove('hidden');
-      btn.innerHTML = `<i data-lucide="pause" style="width:14px;height:14px;"></i><span>Dronu Duraklat</span>`;
       btn.classList.add('is-paused');
-      if (window.lucide) lucide.createIcons();
+      updateDroneButtonLabel();
 
       droneInterval = setInterval(() => {
         if (currentStep >= currentWaypoints.length) {
           clearInterval(droneInterval);
           isDroneFlying = false;
+          isDroneCompleted = true;
           if (sprayRing) sprayRing.classList.add('hidden');
-          btn.innerHTML = `<i data-lucide="check-circle" style="width:14px;height:14px;"></i><span>Operasyon Tamamlandı</span>`;
           btn.classList.remove('is-paused');
           btn.classList.add('is-done');
-          if (window.lucide) lucide.createIcons();
+          updateDroneButtonLabel();
           return;
         }
 
         droneMarker.setLatLng(currentWaypoints[currentStep]);
         
         const pct = Math.round(((currentStep + 1) / currentWaypoints.length) * 100);
-        document.getElementById('droneProgressText').textContent = `%${pct}`;
+        document.getElementById('droneProgressText').textContent = currentLang === 'tr' ? `%${pct}` : `${pct}%`;
         document.getElementById('droneProgressBar').style.width = `${pct}%`;
-        document.getElementById('droneBattery').textContent = `%${Math.max(42, 98 - Math.floor(pct * 0.45))}`;
+        const batVal = Math.max(42, 98 - Math.floor(pct * 0.45));
+        document.getElementById('droneBattery').textContent = currentLang === 'tr' ? `%${batVal}` : `${batVal}%`;
 
         currentStep++;
       }, 90);
@@ -1620,6 +2139,7 @@
     function resetDrone() {
       clearInterval(droneInterval);
       isDroneFlying = false;
+      isDroneCompleted = false;
       currentStep = 0;
 
       const btn = document.getElementById('btnStartDrone');
@@ -1629,21 +2149,22 @@
       if (hud) hud.classList.add('hidden');
       if (sprayRing) sprayRing.classList.add('hidden');
       if (btn) {
-        btn.innerHTML = `<i data-lucide="play" style="width:14px;height:14px;"></i><span>İlaçlama Dronunu Başlat</span>`;
         btn.className = "btn-drone";
-        if (window.lucide) lucide.createIcons();
+        updateDroneButtonLabel();
       }
 
       if (droneMarker && currentWaypoints.length > 0) {
         droneMarker.setLatLng(currentWaypoints[0]);
       }
-      document.getElementById('droneProgressText').textContent = '%0';
+      document.getElementById('droneProgressText').textContent = currentLang === 'tr' ? '%0' : '0%';
       document.getElementById('droneProgressBar').style.width = '0%';
     }
 
     function generatePDFReport() {
+      syncPrintLogo();
       const now = new Date();
-      document.getElementById('printDate').textContent = now.toLocaleDateString('tr-TR', {
+      const locale = currentLang === 'tr' ? 'tr-TR' : 'en-US';
+      document.getElementById('printDate').textContent = now.toLocaleDateString(locale, {
         year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
       });
 
