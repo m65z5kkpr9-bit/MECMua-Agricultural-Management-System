@@ -121,7 +121,6 @@ MECMua is designed as a solution that digitalizes modern agricultural operations
 
 
 
-Tabii — aşağıdaki metni doğrudan GitHub README olarak kullanabileceğin şekilde hazırladım. Kaynakça kısmı, veri çekim kaynaklarını net gösteriyor; en altta da 5 kişilik proje görevleri için yer bırakıldı. İsimleri sen doldurabilirsin.
 
 MECMua Agricultural Management System
 
