@@ -1,3 +1,4 @@
+**https://mec-mua-agricultural-management-system.replit.app**
 # MECMua Agricultural Management System
 
 MECMua is a smart agricultural management dashboard developed to digitally monitor, analyze, and optimize agricultural operations. The project visualizes land data on a map for different agricultural regions, fetches live meteorological data, analyzes soil conditions, and simulates drone-based agricultural operations. It provides a single-page web interface offering decision support for farmers, field managers, and agricultural teams.
