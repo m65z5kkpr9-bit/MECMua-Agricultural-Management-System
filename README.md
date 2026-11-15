@@ -88,6 +88,12 @@ The project is a frontend-only application operating with user interface and sim
 - **Lucide Icons**
   - https://lucide.dev/
   - Used for symbol and icon design.
+  NASA POWER API (Prediction Of Worldwide Energy Resources)
+https://power.larc.nasa.gov/
+Used for satellite-derived solar radiation, agroclimatology parameters, and surface meteorological baseline data across regional agricultural profiles.
+Esri / NASA ArcGIS World Imagery & Earth Observation Layers
+https://www.arcgis.com/
+Used for high-resolution satellite base mapping, terrain visualization, and geospatial field boundary rendering.
 
 ## Project Team
 
